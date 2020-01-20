@@ -1,3 +1,4 @@
+import 'package:basicofall/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Screen3 extends StatefulWidget {
@@ -10,12 +11,7 @@ class _Screen3State extends State<Screen3> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "This is Page 3",
-              textDirection: TextDirection.ltr,
-            ),
-          ),
+          appBar: MyAppBar(),
           body: SingleChildScrollView(
             child: Center(
               child: Column(
@@ -34,10 +30,20 @@ class _Screen3State extends State<Screen3> {
                                 }),
                             Expanded(
                               child: Text(
-                                "Back to Home",
+                                "Back",
                                 textDirection: TextDirection.ltr,
                               ),
                             ),
+                            Text(
+                              "Home",
+                              textDirection: TextDirection.ltr,
+                            ),
+                            IconButton(
+                                icon: Icon(Icons.home,
+                                    textDirection: TextDirection.ltr),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/home');
+                                }),
                           ],
                         ),
                       ))

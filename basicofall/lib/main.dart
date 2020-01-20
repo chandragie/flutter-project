@@ -53,6 +53,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
+        "/home": (BuildContext context) => MyStatefulWidget(),
         "/anotherpage": (BuildContext context) => Screen2(),
         "/anotherpage2": (BuildContext context) => Screen3(),
       },

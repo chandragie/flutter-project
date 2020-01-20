@@ -7,47 +7,37 @@ class Screen2 extends StatefulWidget {
 }
 
 class _Screen2State extends State<Screen2> {
+  List list = List();
+
+  @override
+  void initState() {
+    super.initState();
+    list.add("Todo 1");
+    list.add("Todo 2");
+    list.add("Todo 3");
+    list.add("Todo 4");
+    list.add("Todo 5");
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: MyAppBar(),
-          body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(top: 10.0),
-                    child: Card(
-                      child: Row(
-                        textDirection: TextDirection.ltr,
-                        children: <Widget>[
-                          IconButton(
-                              icon: Icon(Icons.arrow_back,
-                                  textDirection: TextDirection.ltr),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              }),
-                          Expanded(
-                            child: Text(
-                              "Back to Home",
-                              textDirection: TextDirection.ltr,
-                            ),
-                          ),
-                          Text(
-                            "Next Page",
-                            textDirection: TextDirection.ltr,
-                          ),
-                          IconButton(
-                              icon: Icon(Icons.arrow_forward,
-                                  textDirection: TextDirection.ltr),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/anotherpage2');
-                              }),
-                        ],
-                      ),
-                    ))
-              ],
-            ),
+          appBar: AppBar(
+              title: Text(
+            "Todos",
+            textDirection: TextDirection.ltr,
+          )),
+          body: ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Dismissible(
+                key: Key(index.toString()),
+                child: ListTile(
+                  title: Text(list[index]),
+                ),
+              );
+            },
           )),
     );
   }

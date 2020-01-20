@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'anotherpage.dart';
+import 'anotherpage2.dart';
+import 'appbar.dart';
 
 void main() {
   runApp(MyStatefulWidget());
@@ -49,198 +52,170 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Flutter Beginner",
-              textDirection: TextDirection.ltr,
+      routes: <String, WidgetBuilder>{
+        "/anotherpage": (BuildContext context) => Screen2(),
+        "/anotherpage2": (BuildContext context) => Screen3(),
+      },
+      home: Builder(
+        builder: (context) => Scaffold(
+            appBar: MyAppBar(),
+            drawer: Drawer(
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage("images/bg.jpeg"),
+                        // height: 150.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 50.0, left: 16.0),
+                        child: CircleAvatar(
+                          radius: 40.0,
+                          backgroundImage: AssetImage("images/hckr.png"),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 140.0, left: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Chandra Gie",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0),
+                            ),
+                            Text(
+                              "First Flutter Project",
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(Icons.add),
+                        title: Text("Item 1"),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.add),
+                        title: Text("Item 2"),
+                        onTap: () {},
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.beenhere,
-                  textDirection: TextDirection.ltr,
-                ),
-                onPressed: () {
-                  print("been here clicked");
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.map,
-                  textDirection: TextDirection.ltr,
-                ),
-                onPressed: () {
-                  print("map clicked");
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_right,
-                  textDirection: TextDirection.ltr,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/anotherpage');
-                },
-              )
-            ],
-          ),
-          drawer: Drawer(
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage("images/bg.jpeg"),
-                      // height: 150.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 50.0, left: 16.0),
-                      child: CircleAvatar(
-                        radius: 40.0,
-                        backgroundImage: AssetImage("images/hckr.png"),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                print("Floating button clicked!");
+              },
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: Row(
+                          textDirection: TextDirection.ltr,
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.person,
+                                textDirection: TextDirection.ltr,
+                              ),
+                              onPressed: () {
+                                print("person is clicked!");
+                              },
+                            ),
+                            Expanded(
+                              child: Text(
+                                "Child 2",
+                                textDirection: TextDirection.ltr,
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                textDirection: TextDirection.ltr,
+                              ),
+                              onPressed: () {
+                                print("expand clicked");
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 140.0, left: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Chandra Gie",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0),
-                          ),
-                          Text(
-                            "First Flutter Project",
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: Image(image: AssetImage("images/coolimages.jpg"))),
+                  Padding(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.person), hintText: "Username"),
+                        onChanged: (input) {
+                          print(input);
+                        },
+                      )),
+                  Row(
+                    children: <Widget>[
+                      Checkbox(
+                        value: isChecked,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isChecked = value;
+                          });
+                        },
                       ),
-                    )
-                  ],
-                ),
-                ListView(
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.add),
-                      title: Text("Item 1"),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.add),
-                      title: Text("Item 2"),
-                      onTap: () {},
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              print("Floating button clicked!");
-            },
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(24.0),
-                      child: Row(
+                      Text(
+                        "Check to enable light mode",
                         textDirection: TextDirection.ltr,
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(
-                              Icons.person,
-                              textDirection: TextDirection.ltr,
-                            ),
-                            onPressed: () {
-                              print("person is clicked!");
-                            },
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Child 2",
-                              textDirection: TextDirection.ltr,
-                            ),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.add,
-                              textDirection: TextDirection.ltr,
-                            ),
-                            onPressed: () {
-                              print("expand clicked");
-                            },
-                          )
-                        ],
-                      ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: RaisedButton(
+                      child: Text("Change your brightness now!",
+                          textDirection: TextDirection.ltr),
+                      onPressed: () {
+                        print("changeBrightness!");
+                        changeBrightness();
+                      },
                     ),
                   ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Image(image: AssetImage("images/coolimages.jpg"))),
-                Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          icon: Icon(Icons.person), hintText: "Username"),
-                      onChanged: (input) {
-                        print(input);
-                      },
-                    )),
-                Row(
-                  children: <Widget>[
-                    Checkbox(
-                      value: isChecked,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isChecked = value;
-                        });
-                      },
-                    ),
-                    Text(
-                      "Check to enable light mode",
-                      textDirection: TextDirection.ltr,
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: RaisedButton(
-                    child: Text("Change your brightness now!",
-                        textDirection: TextDirection.ltr),
-                    onPressed: () {
-                      print("changeBrightness!");
-                      changeBrightness();
-                    },
-                  ),
-                ),
-                ButtonBar(
-                  children: <Widget>[
-                    Radio(
-                      value: 1,
-                      groupValue: gender,
-                      onChanged: (int value) {
-                        setState(() {
-                          gender = value;
-                        });
-                      },
-                    )
-                  ],
-                )
-              ],
-            ),
-          )),
+                  ButtonBar(
+                    children: <Widget>[
+                      Radio(
+                        value: 1,
+                        groupValue: gender,
+                        onChanged: (int value) {
+                          setState(() {
+                            gender = value;
+                          });
+                        },
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )),
+      ),
       theme: ThemeData(
           primaryColor: primaryColor,
           accentColor: accentColor,

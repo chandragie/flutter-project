@@ -22,23 +22,31 @@ class _Screen2State extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
               title: Text(
             "Todos",
             textDirection: TextDirection.ltr,
           )),
-          body: ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Dismissible(
-                key: Key(index.toString()),
-                child: ListTile(
-                  title: Text(list[index]),
-                ),
-              );
-            },
-          )),
+          body: Column(children: <Widget>[
+            ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Dismissible(
+                  key: Key(index.toString()),
+                  child: ListTile(
+                    title: Text(list[index]),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+                icon: Icon(Icons.home, textDirection: TextDirection.ltr),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                })
+          ])),
     );
   }
 }

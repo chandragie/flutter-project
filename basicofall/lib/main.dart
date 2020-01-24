@@ -109,6 +109,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         leading: Icon(Icons.add),
                         title: Text("Item 2"),
                         onTap: () {},
+                      ),
+                      AboutListTile(
+                        icon:
+                            Icon(Icons.info, textDirection: TextDirection.ltr),
+                        applicationIcon: Icon(
+                          Icons.local_play,
+                          textDirection: TextDirection.ltr,
+                          size: 65,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        applicationName: "My Basic Flutter App",
+                        applicationVersion: "1.0.0-BETA",
+                        applicationLegalese: "© 2020 PRIVATE",
+                        child: Text("About App"),
                       )
                     ],
                   )
